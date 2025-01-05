@@ -1,10 +1,16 @@
 import Navbar from './components/Navbar'
+import RightSidebar from './components/RightSidebar'
+import Home from './components/Home'
 
 function App() {
   return (
     <>
-      <div className='bg-gray-100 w-full h-full'>
-        <Navbar></Navbar>
+      <div className='flex flex-col bg-gray-100 w-full h-full'>
+        <Navbar />
+        <div className="h-full flex justify-center">
+          <Home />
+          <RightSidebar />
+        </div>
       </div>
     </>
   )
