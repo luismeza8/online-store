@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <>
-      <div className="bg-white w-full h-[8%]">
+      <div className="bg-white w-full h-14">
         <ul className='w-full h-full flex justify-evenly items-center'>
           <li className='font-bold'>Shop</li>
           <li>Home</li>
