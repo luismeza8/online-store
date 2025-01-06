@@ -2,37 +2,36 @@ import Navbar from './components/Navbar'
 import RightSidebar from './components/RightSidebar'
 import Home from './components/Home'
 import ItemCard from "./components/ItemCard"
+import { useState } from 'react'
+import { useEffect } from 'react'
+
+const URL = "https://fakestoreapi.com/products"
 
 function App() {
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    async function fetchItems() {
+      try {
+        const response = await fetch(URL)
+        const json = await response.json()
+        setItems(json)
+      } catch (e) {
+        console.error(e, e.message)
+      }
+    }
+      fetchItems();
+  }, [])
+
   return (
     <>
       <div className='flex flex-col bg-gray-100 w-full h-auto'>
         <Navbar />
         <div className="h-full flex justify-center">
           <Home>
-            <ItemCard title='Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
-            <ItemCard title='item #1' price='$300' img='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'></ItemCard>
+            { items && items.map((item) => {
+              return <ItemCard key={item.id} title={item.title} price={item.price} img={item.image} />
+            }) }
           </Home>
           <RightSidebar />
         </div>
