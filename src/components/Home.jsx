@@ -1,10 +1,51 @@
-export default function Home({ children }) {
+import ItemCard from "./ItemCard"
+import { useState } from 'react'
+import { useEffect } from 'react'
+
+const URL = "https://fakestoreapi.com/products"
+const Sorting = {
+  Desc: "desc",
+  Asc: "asc"
+}
+
+export default function Home() {
+  const [items, setItems] = useState([])
+  const [sorting, setSorting] = useState(Sorting.Asc)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    async function fetchItems() {
+      try {
+        setLoading(true);
+        const response = await fetch(`${URL}?sort=${sorting}`);
+        const json = await response.json();
+        setItems(json);
+      } catch (e) {
+        console.error(e, e.message);
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchItems();
+  }, [sorting])
+
   return (
     <>
       <div className='flex flex-col w-1/2 mx-8 mb-8'>
-        <h1 className="text-3xl font-bold my-4">Browse items</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold my-4">Browse items</h1>
+          <div className="flex items-center">
+            <p className="mx-2 font-bold">Sort:</p>
+            <select className="px-2 py-1 bg-white rounded-xl shadow-md" name="sort" id="">
+              <option onClick={() => {setSorting(Sorting.Desc)}} value="desc">Descendiente</option>
+              <option onClick={() => {setSorting(Sorting.Asc)}} value="asc">Ascendente</option>
+            </select>
+          </div>
+        </div>
         <div className="flex flex-wrap gap-6 w-full h-auto">
-          { children }
+          { loading ? (<p>loading</p>) : items && items.map((item) => {
+            return <ItemCard key={item.id} title={item.title} price={item.price} img={item.image} rate={item.rating.rate} rateCount={item.rating.count} />
+          }) }
         </div>
       </div>
     </>

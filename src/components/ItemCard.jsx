@@ -1,7 +1,7 @@
 export default function ItemCard({ title, img, price, rate, rateCount }) {
   return (
     <>
-      <div className="flex flex-col max-w-[30%] bg-white rounded-xl shadow-md">
+      <div className="flex flex-col max-w-[31%] bg-white rounded-xl shadow-md">
         <div className="flex flex-col justify-center min-h-[28rem]">
           <img className="px-8" src={ img } alt="" />
         </div>
