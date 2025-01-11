@@ -1,5 +1,4 @@
 import Navbar from './components/Navbar'
-import RightSidebar from './components/RightSidebar'
 import Home from './components/Home'
 
 function App() {

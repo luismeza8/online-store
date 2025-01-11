@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard"
-import RightSidebar from "./RightSidebar"
+import PriceFilter from "./PriceFilter"
 import { useState, useEffect, useRef } from 'react'
 
 const URL = "https://fakestoreapi.com/products"
@@ -12,6 +12,7 @@ export default function Home() {
   const [items, setItems] = useState([])
   const [sorting, setSorting] = useState(Sorting.Asc)
   const [loading, setLoading] = useState(false)
+  const [priceFiltered, setPriceFiltered] = useState([])
 
   const originalListItems = useRef([]);
 
@@ -40,6 +41,10 @@ export default function Home() {
     }
   }, [sorting]);
 
+  const handlePriceFiltered = (priceFilteredFromChild) => {
+    setPriceFiltered(priceFilteredFromChild)
+  }
+
   return (
     <>
       <div className='flex flex-col w-1/2 mx-8 mb-8'>
@@ -47,7 +52,11 @@ export default function Home() {
           <h1 className="text-3xl font-bold my-4">Browse items</h1>
           <div className="flex items-center">
             <p className="mx-2 font-bold">Sort:</p>
-            <select onChange={(e) => setSorting(e.target.value)} className="px-2 py-1 bg-white rounded-xl shadow-md" name="sort" id="">
+            <select 
+              onChange={(e) => setSorting(e.target.value)} 
+              className="px-2 py-1 bg-white rounded-xl shadow-md" 
+              name="sort" 
+            >
               <option value={Sorting.Asc}>Ascendente</option>
               <option value={Sorting.Desc}>Descendiente</option>
             </select>
@@ -66,7 +75,9 @@ export default function Home() {
           )))}
         </div>
       </div>
-      <RightSidebar />
+      <div className="m-4 h-screen w-1/5 bg-white flex flex-col">
+        <PriceFilter getPriceFiltered={handlePriceFiltered}/>
+      </div>
     </>
   )
 }
