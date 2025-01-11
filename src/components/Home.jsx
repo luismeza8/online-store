@@ -12,7 +12,7 @@ export default function Home() {
   const [items, setItems] = useState([])
   const [sorting, setSorting] = useState(Sorting.Asc)
   const [loading, setLoading] = useState(false)
-  const [priceFiltered, setPriceFiltered] = useState([])
+  const [priceFiltered, setPriceFiltered] = useState([0, 100])
 
   const originalListItems = useRef([]);
 
@@ -31,7 +31,7 @@ export default function Home() {
       }
     }
     fetchItems();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (sorting === Sorting.Desc) {
@@ -41,8 +41,16 @@ export default function Home() {
     }
   }, [sorting]);
 
+  useEffect(() => {
+    setItems([...originalListItems.current.filter((item) => {
+      if (item.price >= priceFiltered[0] && item.price <= priceFiltered[1]) {
+        return item;
+      }
+    })]);
+  }, [priceFiltered]);
+
   const handlePriceFiltered = (priceFilteredFromChild) => {
-    setPriceFiltered(priceFilteredFromChild)
+    setPriceFiltered(priceFilteredFromChild);
   }
 
   return (
@@ -75,6 +83,8 @@ export default function Home() {
           )))}
         </div>
       </div>
+
+      {/* Sidebar */}
       <div className="m-4 h-screen w-1/5 bg-white flex flex-col">
         <PriceFilter getPriceFiltered={handlePriceFiltered}/>
       </div>

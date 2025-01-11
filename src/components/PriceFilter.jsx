@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function PriceFilter({ getPriceFiltered }) {
   const minValue = 0;
-  const maxValue = 100;
+  const maxValue = 1000;
 
   const [firstValue, setFirstValue] = useState(minValue);
   const [secondValue, setSecondValue] = useState(maxValue);
@@ -17,6 +17,7 @@ export default function PriceFilter({ getPriceFiltered }) {
   const handleOnClickReset = () => {
     setFirstValue(minValue);
     setSecondValue(maxValue);
+    getPriceFiltered([minValue, maxValue]);
   }
 
   const handleOnClickFilter = () => {
