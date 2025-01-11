@@ -1,5 +1,7 @@
 import ItemCard from "./ItemCard"
 import PriceFilter from "./PriceFilter"
+import RecommendedItem from "./RecommendedItem"
+
 import { useState, useEffect, useRef } from 'react'
 
 const URL = "https://fakestoreapi.com/products"
@@ -9,10 +11,11 @@ const Sorting = {
 }
 
 export default function Home() {
-  const [items, setItems] = useState([])
-  const [sorting, setSorting] = useState(Sorting.Asc)
-  const [loading, setLoading] = useState(false)
-  const [priceFiltered, setPriceFiltered] = useState([0, 100])
+  const [items, setItems] = useState([]);
+  const [sorting, setSorting] = useState(Sorting.Asc);
+  const [loading, setLoading] = useState(false);
+  const [priceFiltered, setPriceFiltered] = useState([0, 100]);
+  const [recommendedItems, setRecommendedItems] = useState([]);
 
   const originalListItems = useRef([]);
 
@@ -31,6 +34,15 @@ export default function Home() {
       }
     }
     fetchItems();
+
+    if (items && items.length > 0) {
+      for (let i = 0; i <= 3; i++) {
+        setRecommendedItems([...items[Math.floor(Math.random()*items.length)]])
+      }
+    }
+
+    console.log(recommendedItems)
+
   }, []);
 
   useEffect(() => {
@@ -48,6 +60,22 @@ export default function Home() {
       }
     })]);
   }, [priceFiltered]);
+
+  useEffect(() => {
+    if (items.length > 0) {
+      const uniqueRamdomIndices = new Set();
+      while (uniqueRamdomIndices.size < 3 && uniqueRamdomIndices.size < items.length) {
+        const randomIndex = Math.floor(Math.random() * items.length);
+        uniqueRamdomIndices.add(randomIndex);
+      }
+
+      const recommendations = Array.from(uniqueRamdomIndices).map(
+        (index) => items[index]
+      );
+      setRecommendedItems(recommendations);
+      console.log(recommendedItems)
+    }
+  }, [items])
 
   const handlePriceFiltered = (priceFilteredFromChild) => {
     setPriceFiltered(priceFilteredFromChild);
@@ -87,6 +115,10 @@ export default function Home() {
       {/* Sidebar */}
       <div className="m-4 h-fit w-1/5 bg-white flex flex-col rounded-2xl shadow-md">
         <PriceFilter getPriceFiltered={handlePriceFiltered}/>
+        <h2 className="m-2 text-lg font-bold">Recommended items</h2>
+        { recommendedItems && recommendedItems.map((item) => {
+          return <RecommendedItem key={item.id} title={item.title} img={item.image} price={item.price}/>
+        }) }
       </div>
     </>
   )
