@@ -1,6 +1,6 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function PriceFilter() {
   const minValue = 0;
@@ -9,30 +9,35 @@ export default function PriceFilter() {
   const [firstValue, setFirstValue] = useState(minValue);
   const [secondValue, setSecondValue] = useState(maxValue);
 
-  useEffect(() => {
-    console.log("first value:", firstValue)
-    console.log("second value:", secondValue)
-  }, [firstValue, secondValue]);
+  const handleOnChangeSlider = (values) => {
+    setFirstValue(values[0]);
+    setSecondValue(values[1]);
+  }
+
+  const handleOnClickReset = () => {
+    setFirstValue(minValue);
+    setSecondValue(maxValue);
+  }
 
   return (
     <>
-      <h2>Filtrar por precio</h2>
+      <h2>Filter by price</h2>
       <Slider 
         range
         value={[firstValue, secondValue]}
         min={minValue}
         max={maxValue}
         defaultValue={[minValue, maxValue]}
-        onChange={(values) => {
-          setFirstValue(values[0])
-          setSecondValue(values[1])
-        }}
+        onChange={handleOnChangeSlider}
       />
       <div className="flex w-full justify-between">
-        <p>Desde: ${ firstValue }</p>
-        <p>Hasta: ${ secondValue }</p>
+        <p>From: ${ firstValue }</p>
+        <p>To: ${ secondValue }</p>
       </div>
-      <button>Filtrar</button>
+      <div className="flex w-full">
+        <button onClick={handleOnClickReset} className="bg-gray-200 w-full">Reset</button>
+        <button className="bg-gray-400 w-full">Filter</button>
+      </div>
     </>
   )
 }
