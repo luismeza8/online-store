@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       {/* Sidebar */}
-      <div className="m-4 h-screen w-1/5 bg-white flex flex-col">
+      <div className="m-4 h-fit w-1/5 bg-white flex flex-col rounded-2xl shadow-md">
         <PriceFilter getPriceFiltered={handlePriceFiltered}/>
       </div>
     </>
