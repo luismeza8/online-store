@@ -9,7 +9,6 @@ function App() {
         <Navbar />
         <div className="h-full flex justify-center">
           <Home />
-          <RightSidebar />
         </div>
       </div>
     </>
