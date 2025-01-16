@@ -102,6 +102,7 @@ export default function Home() {
           { loading ? (<p>loading</p>) : (items && items.map((item) => (
             <ItemCard 
               key={item.id} 
+              id={item.id}
               title={item.title} 
               price={item.price} 
               img={item.image} 

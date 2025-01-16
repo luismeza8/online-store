@@ -1,4 +1,6 @@
-export default function ItemCard({ title, img, price, rate, rateCount }) {
+import { Link } from "react-router";
+
+export default function ItemCard({ id, title, img, price, rate, rateCount }) {
   return (
     <>
       <div className="flex flex-col max-w-[32%] mb-6 bg-white rounded-xl shadow-md">
@@ -7,7 +9,7 @@ export default function ItemCard({ title, img, price, rate, rateCount }) {
         </div>
         <div className="pb-2 px-4 pt-8 flex flex-col justify-between h-full">
           <div className="mb-4">
-            <h2 className="font-bold">{ title }</h2>
+            <Link to={`item/${id}`} className="font-bold hover:underline hover:font-bold hover:cursor-pointer">{ title }</Link>
             <p className="font-semibold">⭐ {rate} ({rateCount})</p>
           </div>
           <p>${ price }</p>
