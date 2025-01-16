@@ -98,7 +98,7 @@ export default function Home() {
             </select>
           </div>
         </div>
-        <div className="flex flex-wrap gap-6 w-full h-auto">
+        <div className="flex flex-wrap justify-between w-full h-auto">
           { loading ? (<p>loading</p>) : (items && items.map((item) => (
             <ItemCard 
               key={item.id} 
