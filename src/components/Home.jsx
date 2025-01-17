@@ -118,7 +118,7 @@ export default function Home() {
         <PriceFilter getPriceFiltered={handlePriceFiltered}/>
         <h2 className="mx-4 mt-4 mb-2 text-lg font-bold">Recommended items</h2>
         { recommendedItems && recommendedItems.map((item) => {
-          return <RecommendedItem key={item.id} title={item.title} img={item.image} price={item.price}/>
+          return <RecommendedItem key={item.id} itemId={item.id} title={item.title} img={item.image} price={item.price}/>
         }) }
       </div>
     </>
