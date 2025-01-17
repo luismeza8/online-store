@@ -1,6 +1,6 @@
-import ItemCard from "./ItemCard"
-import PriceFilter from "./PriceFilter"
-import RecommendedItem from "./RecommendedItem"
+import ItemCard from "../components/ItemCard"
+import PriceFilter from "../components/PriceFilter"
+import RecommendedItem from "../components/RecommendedItem"
 
 import { useState, useEffect, useRef } from 'react'
 
