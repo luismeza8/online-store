@@ -1,3 +1,4 @@
+import AddToShoppingCartButton from "./AddToShoppingCartButton"
 import { Link } from "react-router";
 
 export default function ItemCard({ id, title, img, price, rate, rateCount }) {
@@ -14,9 +15,7 @@ export default function ItemCard({ id, title, img, price, rate, rateCount }) {
           </div>
           <div className="flex justify-between items-end">
             <p className="text-lg italic font-semibold">${ price }</p>
-            <button className="bg-blue-700 text-white py-2 px-4 rounded-3xl text-sm shadow-md">
-              <img className="w-5" src="/public/shopping_cart_white.svg" alt="" />
-            </button>
+            <AddToShoppingCartButton itemId={id} showTitle={false} />
           </div>
         </div>
       </div>

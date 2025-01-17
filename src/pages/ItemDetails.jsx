@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 
+import AddToShoppingCartButton from "../components/AddToShoppingCartButton"
+
 export default function ItemDetails() {
   const URL = "https://fakestoreapi.com/products";
   const { itemId } = useParams();
@@ -41,10 +43,7 @@ export default function ItemDetails() {
               <p className="text-gray-700 mb-1">{ item.description }</p>
               <p className="text-gray-600 mb-6">Category: { item.category }</p>
               <h3 className="text-2xl mb-4 font-semibold italic">${ item.price }</h3>
-              <button className="flex gap-2 items-center bg-blue-700 text-white py-2 px-4 rounded-3xl text-sm shadow-md">
-                <img className="w-6" src="/public/shopping_cart_white.svg" alt="" />
-                <p>Add to cart</p>
-              </button>
+              <AddToShoppingCartButton itemId={item.id} />
             </div>
           </div>
           )
