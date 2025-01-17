@@ -12,7 +12,12 @@ export default function ItemCard({ id, title, img, price, rate, rateCount }) {
             <Link to={`item/${id}`} className="font-bold hover:underline hover:font-bold hover:cursor-pointer">{ title }</Link>
             <p className="font-semibold">⭐ {rate} ({rateCount})</p>
           </div>
-          <p>${ price }</p>
+          <div className="flex justify-between items-end">
+            <p className="text-lg italic font-semibold">${ price }</p>
+            <button className="bg-blue-700 text-white py-2 px-4 rounded-3xl text-sm shadow-md">
+              <img className="w-5" src="/public/shopping_cart_white.svg" alt="" />
+            </button>
+          </div>
         </div>
       </div>
     </>

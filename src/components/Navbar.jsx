@@ -17,7 +17,7 @@ export default function Navbar() {
               className="hover:bg-gray-100 p-1 rounded-full"
               to="/cart"
             >
-              <img className="" src="src/assets/shopping_cart.svg" alt="" />
+              <img className="" src="/public/shopping_cart_black.svg" alt="" />
             </Link>
           </div>
         </div>
