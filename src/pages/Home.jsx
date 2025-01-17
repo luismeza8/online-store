@@ -40,9 +40,6 @@ export default function Home() {
         setRecommendedItems([...items[Math.floor(Math.random()*items.length)]])
       }
     }
-
-    console.log(recommendedItems)
-
   }, []);
 
   useEffect(() => {
@@ -73,7 +70,6 @@ export default function Home() {
         (index) => items[index]
       );
       setRecommendedItems(recommendations);
-      console.log(recommendedItems)
     }
   }, [items])
 

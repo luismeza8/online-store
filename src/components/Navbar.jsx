@@ -13,7 +13,10 @@ export default function Navbar() {
           <div className="flex w-2/6 justify-end items-center gap-12">
             <Link>instagram</Link>
             <Link>tiktok</Link>
-            <Link className="hover:bg-gray-100 p-1 rounded-full">
+            <Link 
+              className="hover:bg-gray-100 p-1 rounded-full"
+              to="/cart"
+            >
               <img className="" src="src/assets/shopping_cart.svg" alt="" />
             </Link>
           </div>

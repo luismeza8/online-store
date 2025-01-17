@@ -14,7 +14,6 @@ export default function ItemDetails() {
         setLoading(true);
         const response = await fetch(`${URL}/${itemId}`);
         const json = await response.json();
-        console.log(json)
         setItem(json);
       } catch (e) {
         console.error(e, e.message);
