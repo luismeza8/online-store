@@ -47,7 +47,7 @@ export default function ShoppingCart() {
           <p>Loading...</p>
         ) : (
           items.map((item) => (
-            <ItemInShoppingCart key={ item.id } title={ item.title } price={ item.price } img={ item.image }/>
+            <ItemInShoppingCart key={ item.id } id={ item.id } title={ item.title } price={ item.price } img={ item.image }/>
           ))
         ) }
       </div>
