@@ -1,3 +1,5 @@
+import ItemInShoppingCart from "../components/ItemInShoppingCart";
+
 import { useEffect, useState } from "react";
 
 export default function ShoppingCart() {
@@ -38,13 +40,14 @@ export default function ShoppingCart() {
   }, [cart]);
   
   return (
-    <div className="bg-red-400 flex justify-center w-full h-full">
-      <div className="w-[60%] h-full bg-blue-400">
+    <div className="flex flex-col items-center w-full h-full">
+      <h2 className="font-bold text-3xl mt-6 mb-4">Your shopping cart</h2>
+      <div className="w-[60%] h-full flex flex-col items-center">
         { loading ? (
           <p>Loading...</p>
         ) : (
           items.map((item) => (
-            <h2>{ item.title }</h2>
+            <ItemInShoppingCart key={ item.id } title={ item.title } price={ item.price } img={ item.image }/>
           ))
         ) }
       </div>
