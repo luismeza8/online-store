@@ -1,6 +1,12 @@
 import { Link } from "react-router";
 
 export default function Navbar() {
+  const getShoppingCartLenght = () => {
+    const stringOfItems = localStorage.getItem("cart") || 0;
+    const listOfItems = JSON.parse(stringOfItems);
+    return listOfItems.length;
+  }
+
   return (
     <>
       <div className="bg-white w-full h-[8vh] flex justify-center">
@@ -14,10 +20,11 @@ export default function Navbar() {
             <Link>instagram</Link>
             <Link>tiktok</Link>
             <Link 
-              className="hover:bg-gray-100 p-1 rounded-full"
+              className="flex hover:bg-gray-100 p-1 rounded-full"
               to="/cart"
             >
               <img className="" src="/public/shopping_cart_black.svg" alt="" />
+              <p className="text-sm">{getShoppingCartLenght()}</p>
             </Link>
           </div>
         </div>
