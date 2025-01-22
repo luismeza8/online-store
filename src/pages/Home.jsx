@@ -2,7 +2,9 @@ import ItemCard from "../components/ItemCard"
 import PriceFilter from "../components/PriceFilter"
 import RecommendedItem from "../components/RecommendedItem"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
+
+import { ItemsContext } from "../ItemsContext"
 
 const URL = "https://fakestoreapi.com/products"
 const Sorting = {
@@ -19,28 +21,8 @@ export default function Home() {
 
   const originalListItems = useRef([]);
 
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        setLoading(true);
-        const response = await fetch(URL);
-        const json = await response.json();
-        originalListItems.current = json;
-        setItems(json);
-      } catch (e) {
-        console.error(e, e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchItems();
-
-    if (items && items.length > 0) {
-      for (let i = 0; i <= 3; i++) {
-        setRecommendedItems([...items[Math.floor(Math.random()*items.length)]])
-      }
-    }
-  }, []);
+  const contextItems = useContext(ItemsContext)
+  console.log(contextItems)
 
   useEffect(() => {
     if (sorting === Sorting.Desc) {
