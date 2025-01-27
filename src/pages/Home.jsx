@@ -4,25 +4,26 @@ import RecommendedItem from "../components/RecommendedItem"
 
 import { useState, useEffect, useRef, useContext } from 'react'
 
-import { ItemsContext } from "../ItemsContext"
+import { ItemsContext } from "../contexts"
 
-const URL = "https://fakestoreapi.com/products"
 const Sorting = {
   Desc: "desc",
   Asc: "asc"
 }
 
-export default function Home() {
+export default function Home({ isLoading }) {
   const [items, setItems] = useState([]);
   const [sorting, setSorting] = useState(Sorting.Asc);
-  const [loading, setLoading] = useState(false);
   const [priceFiltered, setPriceFiltered] = useState([0, 100]);
   const [recommendedItems, setRecommendedItems] = useState([]);
 
   const originalListItems = useRef([]);
 
-  const contextItems = useContext(ItemsContext)
-  console.log(contextItems)
+  const contextItems = useContext(ItemsContext);
+
+  if (items.length === 0 && contextItems.length > 0) {
+    setItems(contextItems);
+  }
 
   useEffect(() => {
     if (sorting === Sorting.Desc) {
@@ -77,7 +78,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-wrap justify-between w-full h-auto">
-          { loading ? (<p>loading</p>) : (items && items.map((item) => (
+          { isLoading ? (<p>loading</p>) : (items && items.map((item) => (
             <ItemCard 
               key={item.id} 
               id={item.id}
