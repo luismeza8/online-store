@@ -79,15 +79,7 @@ export default function Home({ isLoading }) {
         </div>
         <div className="flex flex-wrap justify-between w-full h-auto">
           { isLoading ? (<p>loading</p>) : (items && items.map((item) => (
-            <ItemCard 
-              key={item.id} 
-              id={item.id}
-              title={item.title} 
-              price={item.price} 
-              img={item.image} 
-              rate={item.rating.rate} 
-              rateCount={item.rating.count}
-            />
+            <ItemCard key={item.id} item={ item } />
           )))}
         </div>
       </div>
@@ -97,7 +89,7 @@ export default function Home({ isLoading }) {
         <PriceFilter getPriceFiltered={handlePriceFiltered}/>
         <h2 className="mx-4 mt-4 mb-2 text-lg font-bold">Recommended items</h2>
         { recommendedItems && recommendedItems.map((item) => {
-          return <RecommendedItem key={item.id} itemId={item.id} title={item.title} img={item.image} price={item.price}/>
+          return <RecommendedItem key={ item.id } item={ item } />
         }) }
       </div>
     </>

@@ -5,7 +5,6 @@ import ShoppingCart from './pages/ShoppingCart'
 import Navbar from './components/Navbar'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 
 import ItemsProvider from "./providers/ItemsProvider";
 
