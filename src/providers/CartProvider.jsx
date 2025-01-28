@@ -8,8 +8,8 @@ export default function CartProvider({ children }) {
     setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((id) => id !== itemId));
+  const removeFromCart = (itemIndex) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemIndex));
   }
 
   return (
