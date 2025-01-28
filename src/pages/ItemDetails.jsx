@@ -24,7 +24,7 @@ export default function ItemDetails() {
             <p className="text-gray-700 mb-1">{ item.description }</p>
             <p className="text-gray-600 mb-6">Category: { item.category }</p>
             <h3 className="text-2xl mb-4 font-semibold italic">${ item.price }</h3>
-            <AddToShoppingCartButton itemId={item.id} />
+            <AddToShoppingCartButton item={ item } />
           </div>
         </div> }
     </>

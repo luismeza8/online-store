@@ -15,7 +15,7 @@ export default function ItemCard({ item }) {
           </div>
           <div className="flex justify-between items-end">
             <p className="text-lg italic font-semibold">${ item.price }</p>
-            <AddToShoppingCartButton itemId={ item.id } showTitle={false} />
+            <AddToShoppingCartButton item={ item } showTitle={false} />
           </div>
         </div>
       </div>

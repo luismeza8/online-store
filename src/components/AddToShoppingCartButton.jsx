@@ -1,13 +1,11 @@
-export default function AddToShoppingCartButton({ itemId, showTitle=true }) {
+import { useContext } from "react"
+import { CartContext } from "../contexts"
+
+export default function AddToShoppingCartButton({ item, showTitle=true }) {
+  const { addToCart } = useContext(CartContext);
+
   const handleClick = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-
-    if (cart === null) {
-      localStorage.setItem("cart", JSON.stringify([]));
-      cart = JSON.parse(localStorage.getItem("cart"));
-    }
-
-    localStorage.setItem("cart", JSON.stringify([...cart, itemId]))
+    addToCart(item);
   }
 
   return (

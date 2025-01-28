@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import { CartContext } from "../contexts";
 
 export default function Navbar() {
+  const { cartItems } = useContext(CartContext);
+
   const getShoppingCartLenght = () => {
-    const stringOfItems = localStorage.getItem("cart") || 0;
-    const listOfItems = JSON.parse(stringOfItems);
-    return listOfItems.length;
+    return cartItems.length;
   }
 
   return (
@@ -24,7 +26,7 @@ export default function Navbar() {
               to="/cart"
             >
               <img className="" src="/public/shopping_cart_black.svg" alt="" />
-              <p className="text-sm">{getShoppingCartLenght()}</p>
+              <p className="text-sm">{ getShoppingCartLenght() }</p>
             </Link>
           </div>
         </div>
