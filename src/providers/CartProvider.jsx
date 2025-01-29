@@ -9,7 +9,7 @@ export default function CartProvider({ children }) {
   };
 
   const removeFromCart = (itemIndex) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemIndex));
+    setCartItems((prevItems) => prevItems.filter((_, i) => i !== itemIndex));
   }
 
   return (

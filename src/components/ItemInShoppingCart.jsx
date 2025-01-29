@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import { CartContext } from "../contexts";
 
-export default function ItemInShoppingCart({ item }) {
+export default function ItemInShoppingCart({ item, index }) {
   const { removeFromCart } = useContext(CartContext);
 
   const handleClick = () => {
-    removeFromCart(item.id)
+    removeFromCart(index);
   }
 
   return (

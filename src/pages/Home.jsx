@@ -14,10 +14,8 @@ const Sorting = {
 export default function Home({ isLoading }) {
   const [items, setItems] = useState([]);
   const [sorting, setSorting] = useState(Sorting.Asc);
-  const [priceFiltered, setPriceFiltered] = useState([0, 100]);
+  const [priceFiltered, setPriceFiltered] = useState([0, 1000]);
   const [recommendedItems, setRecommendedItems] = useState([]);
-
-  const originalListItems = useRef([]);
 
   const contextItems = useContext(ItemsContext);
 
@@ -25,16 +23,18 @@ export default function Home({ isLoading }) {
     setItems(contextItems);
   }
 
+  const originalListItems = useRef(contextItems);
+
   useEffect(() => {
     if (sorting === Sorting.Desc) {
-      setItems([...originalListItems.current].reverse());
+      setItems([...contextItems].reverse());
     } else {
       setItems(originalListItems.current);
     }
   }, [sorting]);
 
   useEffect(() => {
-    setItems([...originalListItems.current.filter((item) => {
+    setItems([...contextItems.filter((item) => {
       if (item.price >= priceFiltered[0] && item.price <= priceFiltered[1]) {
         return item;
       }
@@ -42,19 +42,19 @@ export default function Home({ isLoading }) {
   }, [priceFiltered]);
 
   useEffect(() => {
-    if (items.length > 0) {
+    if (contextItems.length > 0) {
       const uniqueRamdomIndices = new Set();
-      while (uniqueRamdomIndices.size < 3 && uniqueRamdomIndices.size < items.length) {
-        const randomIndex = Math.floor(Math.random() * items.length);
+      while (uniqueRamdomIndices.size < 3 && uniqueRamdomIndices.size < contextItems.length) {
+        const randomIndex = Math.floor(Math.random() * contextItems.length);
         uniqueRamdomIndices.add(randomIndex);
       }
 
       const recommendations = Array.from(uniqueRamdomIndices).map(
-        (index) => items[index]
+        (index) => contextItems[index]
       );
       setRecommendedItems(recommendations);
     }
-  }, [items])
+  }, [contextItems])
 
   const handlePriceFiltered = (priceFilteredFromChild) => {
     setPriceFiltered(priceFilteredFromChild);
@@ -78,7 +78,7 @@ export default function Home({ isLoading }) {
           </div>
         </div>
         <div className="flex flex-wrap justify-between w-full h-auto">
-          { isLoading ? (<p>loading</p>) : (items && items.map((item) => (
+          { isLoading ? (<p>loading</p>) : (items.map((item) => (
             <ItemCard key={item.id} item={ item } />
           )))}
         </div>
