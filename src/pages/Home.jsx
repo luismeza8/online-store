@@ -2,7 +2,7 @@ import ItemCard from "../components/ItemCard"
 import PriceFilter from "../components/PriceFilter"
 import RecommendedItem from "../components/RecommendedItem"
 
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 import { ItemsContext } from "../contexts"
 
@@ -12,33 +12,33 @@ const Sorting = {
 }
 
 export default function Home({ isLoading }) {
-  const [items, setItems] = useState([]);
+  const [displayedItems, setDisplayedItems] = useState([]);
   const [sorting, setSorting] = useState(Sorting.Asc);
   const [priceFiltered, setPriceFiltered] = useState([0, 1000]);
   const [recommendedItems, setRecommendedItems] = useState([]);
 
   const contextItems = useContext(ItemsContext);
 
-  if (items.length === 0 && contextItems.length > 0) {
-    setItems(contextItems);
+  if (displayedItems.length === 0 && contextItems.length > 0) {
+    setDisplayedItems(contextItems);
   }
 
-  const originalListItems = useRef(contextItems);
-
   useEffect(() => {
-    if (sorting === Sorting.Desc) {
-      setItems([...contextItems].reverse());
-    } else {
-      setItems(originalListItems.current);
-    }
+      setDisplayedItems((prev) => [...prev].reverse());
   }, [sorting]);
 
   useEffect(() => {
-    setItems([...contextItems.filter((item) => {
+    const filteredList = [...contextItems.filter((item) => {
       if (item.price >= priceFiltered[0] && item.price <= priceFiltered[1]) {
         return item;
       }
-    })]);
+    })];
+    
+    if (sorting === Sorting.Desc) {
+      setDisplayedItems(filteredList.reverse());
+    } else {
+      setDisplayedItems(filteredList);
+    }
   }, [priceFiltered]);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function Home({ isLoading }) {
           </div>
         </div>
         <div className="flex flex-wrap justify-between w-full h-auto">
-          { isLoading ? (<p>loading</p>) : (items.map((item) => (
+          { isLoading ? (<p>loading</p>) : (displayedItems.map((item) => (
             <ItemCard key={item.id} item={ item } />
           )))}
         </div>
