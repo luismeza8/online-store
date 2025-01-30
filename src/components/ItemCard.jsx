@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default function ItemCard({ item }) {
   return (
     <>
-      <div className="flex flex-col max-w-[32%] mb-6 bg-white rounded-xl shadow-md">
+      <div className="flex flex-col bg-white rounded-xl shadow-md">
         <div className="flex flex-col justify-center min-h-[28rem]">
           <img className="px-8" src={ item.image } alt="" />
         </div>

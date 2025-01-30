@@ -77,7 +77,7 @@ export default function Home({ isLoading }) {
             </select>
           </div>
         </div>
-        <div className="flex flex-wrap justify-between w-full h-auto">
+        <div className="grid grid-cols-3 gap-5">
           { isLoading ? (<p>loading</p>) : (displayedItems.map((item) => (
             <ItemCard key={item.id} item={ item } />
           )))}
